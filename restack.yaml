@@ -1,11 +1,19 @@
+# version: 1
+
+# services:
+#   app:
+#     type: web
+#     env: python
+#     port: 8000
+#     buildCommand: pip install -r requirements.txt
+#     startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
+#     nginx:
+#       client_max_body_size: 20M
 version: 1
 
 services:
   app:
-    type: web
+    type: worker # This tells Restack it's a background/worker service, not a web server
     env: python
-    port: 8000
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
-    nginx:
-      client_max_body_size: 20M
+    startCommand: python src/services.py
